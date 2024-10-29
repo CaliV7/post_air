@@ -33,9 +33,11 @@
         
     </header>
     <main>
-        <form method="post">
+        <form method='post' action='index.php'>
+            <textarea name='contenu' placeholder="votre post" required></textarea>
+            <button type='submit'>Poster</button>
 
-        message à venir
+        
 
         </form>
 
