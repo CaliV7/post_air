@@ -1,5 +1,28 @@
+<?php
+// connexion à la bdd avec mysqli
+$conn=new mysqli('localhost', 'root', '', 'db_postair');
+// fin de connexion bdd si erreur
+if ($conn->connect_error) {
+    die("La connexion a échoué : " . $conn->connect_error);
+}
+//verification que les données user sont bien en POST
+if((isset($_POST['nom']))&&(isset($_POST['email']))&&(isset($_POST['age']))&&(isset($_POST['ville']))&&(isset($_POST['mdpasse']))){
+    $nom=$_POST['nom'];
+    $email=$_POST['email'];
+    $age=$_POST['age'];
+    $ville=$_POST['ville'];
+    $mdpasse=$_POST['mdpasse'];
 
+    //insertion des données user dans la bdd
+    if($conn->query("insert into users (nom,email,age,ville,mdpasse) values ('$nom','$email','$age','$ville','$mdpasse')")){
+    // message de reussite
+    echo "Félicitation  $nom  vous étes maintenant inscris à POSTAIR";
+}
+}
+// fin de connexion à la bdd
+$conn->close();
 
+?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +57,7 @@
             <input type='email' name='email' placeholder='votre email' required>
             <input type='int' name='age' placeholder="Votre age" required>
             <input type='text' name='ville' placeholder="Votre ville" required>
-            <input type='email' name='mdpasse' placeholder="Votre mot de passe" required>
+            <input type='password' name='mdpasse' placeholder="Votre mot de passe" required>
             <button type='submit'>Envoyer</button>
             
         </form>

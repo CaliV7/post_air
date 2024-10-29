@@ -31,7 +31,7 @@
             <input type='text' name='email' placeholder='Votre email' required>
             <input type='password' name='password' placeholder='votre mot de passe' required>
             <button type='submit'>Envoyer</button>
-            <a href="compte.php">creez votre compte</a>
+            <a href="inscription.php">creez votre compte</a>
         </form>
 
 
