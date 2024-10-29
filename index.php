@@ -1,12 +1,11 @@
-<?php
-session_start();
+
 
 
 
 
   
 
-?>
+
 
 
 
@@ -24,23 +23,21 @@ session_start();
 
         <nav>
             <ul>
-                <a href='login.php' Login>Login</a>
+                
                 <a href='Index.php'>Post</a>
                 <a href='Logout.php'>Déconnexion</a>
             </ul>
 
         </nav>
-        <?php
-        if ((isset($_SESSION['login'])) && (isset($_SESSION['password']))) {
-            echo 'Bienvenue ' . $_SESSION['login'] . ' vous êtes connecté';
-        } else {
-            echo 'Connectez vous ';
-        }
-        ?>
-
+        
+        
     </header>
     <main>
-        message a venir
+        <form method="post">
+
+        message à venir
+
+        </form>
 
     </main>
 

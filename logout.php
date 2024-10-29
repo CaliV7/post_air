@@ -16,14 +16,14 @@ session_destroy();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Déconnexion de Post_air</title>
 </head>
 <body>
 <header>
 
 <nav>
 <ul>
-    <a href='login.php' Login>Login</a>
+    
     <a href='Index.php'>Post</a>
     <a href='Logout.php'>Déconnexion</a>
 </ul>
@@ -32,7 +32,7 @@ session_destroy();
 
 </header>
 <main>
-vous etes déconnecté
+vous etes déconnecté, vous pouvez vous reconnecté <a href='login.php' Login>Login</a>
 
 </main>
 
