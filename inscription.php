@@ -17,6 +17,8 @@ if((isset($_POST['nom']))&&(isset($_POST['email']))&&(isset($_POST['age']))&&(is
     if($conn->query("insert into users (nom,email,age,ville,mdpasse) values ('$nom','$email','$age','$ville','$mdpasse')")){
     // message de reussite
     echo "Félicitation  $nom  vous étes maintenant inscris à POSTAIR";
+}else{
+    "Désolé l'inscription a echoué";
 }
 }
 // fin de connexion à la bdd

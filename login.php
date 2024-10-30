@@ -22,7 +22,7 @@ if((isset($_POST['email'])) && (isset($_POST['mdpasse']))){
     if($result->num_rows > 0){
         $user=$result->fetch_assoc();
         if($user['mdpasse'] === $mdpasse){
-            $_SESSION['id']=$user['id'];
+            $_SESSION['user_id']=$user['id'];
             echo 'connexion réussie';
         }else{
             echo 'email ou mot de passe incorrect.';
