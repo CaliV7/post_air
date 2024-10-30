@@ -1,32 +1,37 @@
 <?php
-// connexion à la bdd avec mysqli
-$conn=new mysqli('localhost', 'root', '', 'db_postair');
-// fin de connexion bdd si erreur
-if ($conn->connect_error) {
-    die("La connexion a échoué : " . $conn->connect_error);
-}
+require('connexion_bdd.php');
+
 //verification que les données user sont bien en POST
 if((isset($_POST['nom']))&&(isset($_POST['email']))&&(isset($_POST['age']))&&(isset($_POST['ville']))&&(isset($_POST['mdpasse']))){
-    $nom=$_POST['nom'];
+    $nom= $_POST['nom'];
     $email=$_POST['email'];
     $age=$_POST['age'];
     $ville=$_POST['ville'];
-    $mdpasse=$_POST['mdpasse'];
+    $password=$_POST['mdpasse'];
+    
 
-    //insertion des données user dans la bdd
-    if($conn->query("insert into users (nom,email,age,ville,mdpasse) values ('$nom','$email','$age','$ville','$mdpasse')")){
-    // message de reussite
-    echo "Félicitation  $nom  vous étes maintenant inscris à POSTAIR";
-}else{
-    "Désolé l'inscription a echoué";
-}
-}
-// fin de connexion à la bdd
-$conn->close();
+    // controle que l'email n'est pas deja existant sinon msg d'erreur
+    $stmt= $pdo->prepare('select * from users where email=?');
+    $stmt->execute([$email]);
 
+        if($stmt->rowCount() > 0 ){
+            echo 'Cet Email est déja inscrit';
+        }else{
+        //cryptage du mot de passe 
+         $hashedPassword= password_hash($password,PASSWORD_DEFAULT);
+          //preparation de la requete sans les valeurs
+         $stmt=$pdo->prepare("insert into users (nom,email,age,ville,mdpasse) values (?,?,?,?,?)");
+            // ajout des variables de valeurs
+        $stmt->execute([$nom,$email,$age,$ville,$hashedPassword]);
+            // message de reussite
+         echo "Félicitation  $nom  vous étes maintenant inscris à POSTAIR. Connectez vous pour consulter et envoyer des posts";
+        } 
+    }else{
+        echo 'Merci de remplir tous les champs';
+    }
 ?>
 
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 
 <head>

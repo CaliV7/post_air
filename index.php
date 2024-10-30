@@ -1,27 +1,32 @@
 <?php
 //lancement d'une session pour garder les infos de connexion 
 session_start();
+if(isset($_SESSION['nom'])){
+    $nom=$_SESSION['nom'];
+}
 
-// connexion à la bdd mysqli
+
+// connexion à la bdd en pdo
 require ('connexion_bdd.php');
 
-// recuperation des données a mettre dans la table post de la bdd
-if((isset($_SESSION['user_id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))){
-    $user_id=$_SESSION['user_id'];
+// verification des données post et session a mettre dans la table post de la bdd
+if((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))){
+    $user_id=$_SESSION['id'];
+
     $titre=$_POST['titre'];
-    $contenu=$_POST['contenu'];
-    
+    $contenu=$_POST['contenu'];  
 
-// inscription des données dans la tables posts de la bdd
-    if($conn->query("insert into posts (user_id,titre,contenu) values ('$user_id','$titre','$contenu')")){
+
+//  preparation de la requete pour l'inscription des données dans la bdd
+    $stmt=$pdo->prepare('insert into posts (user_id,titre,contenu) values (?,?,?)');
+    //ajout des variables de valeurs dans la requete
+    $stmt->execute([$user_id,$titre,$contenu]);
+
     echo 'Félicitation votre Post est maintenant publié';
-}else{
-    echo 'Désolé,votre Post ne peut pas etre publié';
-}
 }
 
-//fin de connexion a la bdd
-$conn->close();
+
+
 ?>
 
 
@@ -52,7 +57,7 @@ $conn->close();
     </header>
     <main>
 
-    <h1>Bienvenue chez POST'AIR</h1>
+    <h1>Bienvenue <?php echo $nom ?> chez POST'AIR</h1>
         <form class='form' method='post' action='index.php'>
             <input type='text' name='titre' placeholder="entrer un titre" required>
             <textarea  name='contenu' placeholder="votre post" required></textarea>
