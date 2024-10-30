@@ -24,7 +24,7 @@ session_destroy();
 
 <nav>
 <ul>
-    
+    <a href='Login.php'>Login</a>
     <a href='Index.php'>Post</a>
     <a href='Logout.php'>Déconnexion</a>
 </ul>
@@ -33,6 +33,7 @@ session_destroy();
 
 </header>
 <main>
+    <h1>Bienvenue chez POST'AIR</h1>
 vous etes déconnecté, vous pouvez vous reconnecté <a href='login.php' Login>Login</a>
 
 </main>

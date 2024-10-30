@@ -1,11 +1,14 @@
+
+
 body { 
-    background-color: dimgrey;
+    background: linear-gradient(rgb(43, 204, 232),rgb(246, 56, 135));
+    
 } 
 
-.login {
+.form {
     display:flex;
     justify-content: center ;
     flex-direction: column;
-    gap: 50px;
+    gap: 40px;
     padding: 50px;
 }   

@@ -3,12 +3,7 @@
 session_start();
 
 // connexion à la bdd mysqli
-$conn=new mysqli('localhost','root','','db_postair');
-
-// fin de la connexion si erreur
-if($conn->connect_error){
-    die("la connexion a echoué: " . $conn->connect_error);
-}
+require ('connexion_bdd.php');
 
 // verification que  mail et mdpasse de l'utilisateur sont en post 
 if((isset($_POST['email'])) && (isset($_POST['mdpasse']))){
@@ -52,7 +47,7 @@ $conn->close();
 
         <nav>
             <ul>
-                
+                <a href='Login.php'>Login</a>
                 <a href='Index.php'>Post</a>
                 <a href='Logout.php'>Déconnexion</a>
             </ul>
@@ -63,9 +58,9 @@ $conn->close();
 
     </header>
     <main>
-    <h1>Bienvenue chez Post_air</h1><br>
+    <h1>Bienvenue chez POST'AIR</h1><br>
 
-        <form class="login" method='post' action='login.php'>
+        <form class="form" method='post' action='login.php'>
             <input type='email' name='email' placeholder='Votre email' required>
             <input type='password' name='mdpasse' placeholder='votre mot de passe' required>
             <button type='submit'>Connectez vous</button>

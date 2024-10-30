@@ -51,11 +51,11 @@ $conn->close();
 
     </header>
     <main>
-        <h1>Bienvenue chez Post_air</h1><br>
+        <h1>Bienvenue chez POST'AIR</h1><br>
 
         <p>remplissez les champs ci dessous pour creer votre compte et commencer à poster</p>
 
-        <form method='post' action='inscription.php'>
+        <form class='form' method='post' action='inscription.php'>
             <input type='text' name='nom' placeholder='Votre nom' required>
             <input type='email' name='email' placeholder='votre email' required>
             <input type='int' name='age' placeholder="Votre age" required>

@@ -3,12 +3,7 @@
 session_start();
 
 // connexion à la bdd mysqli
-$conn=new mysqli('localhost','root','','db_postair');
-
-// fin de la connexion si erreur
-if($conn->connect_error){
-    die("la connexion a echoué: ". $conn->connect_error);
-}
+require ('connexion_bdd.php');
 
 // recuperation des données a mettre dans la table post de la bdd
 if((isset($_SESSION['user_id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))){
@@ -46,6 +41,7 @@ $conn->close();
         <nav>
             <ul>
                 
+                <a href='Login.php'>Login</a>
                 <a href='Index.php'>Post</a>
                 <a href='Logout.php'>Déconnexion</a>
             </ul>
@@ -55,7 +51,9 @@ $conn->close();
         
     </header>
     <main>
-        <form method='post' action='index.php'>
+
+    <h1>Bienvenue chez POST'AIR</h1>
+        <form class='form' method='post' action='index.php'>
             <input type='text' name='titre' placeholder="entrer un titre" required>
             <textarea  name='contenu' placeholder="votre post" required></textarea>
             <button type='submit'>Poster</button>
