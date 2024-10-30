@@ -44,6 +44,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POST'AIR</title>
+    <link rel="stylesheet" href="style.css"> 
 </head>
 
 <body>
@@ -64,7 +65,7 @@ $conn->close();
     <main>
     <h1>Bienvenue chez Post_air</h1><br>
 
-        <form method='post' action='login.php'>
+        <form class="login" method='post' action='login.php'>
             <input type='email' name='email' placeholder='Votre email' required>
             <input type='password' name='mdpasse' placeholder='votre mot de passe' required>
             <button type='submit'>Connectez vous</button>

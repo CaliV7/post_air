@@ -1,0 +1,11 @@
+body { 
+    background-color: dimgrey;
+} 
+
+.login {
+    display:flex;
+    justify-content: center ;
+    flex-direction: column;
+    gap: 50px;
+    padding: 50px;
+}   
