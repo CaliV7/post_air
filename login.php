@@ -30,6 +30,7 @@ if((isset($_POST['email'])) && (isset($_POST['mdpasse']))){
 
 $conn->close();
 
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +44,7 @@ $conn->close();
 </head>
 
 <body>
-    <header>
+    <header class='header'>
 
         <nav>
             <ul>
@@ -60,7 +61,7 @@ $conn->close();
     <main>
     <h1>Bienvenue chez POST'AIR</h1><br>
 
-        <form class="form" method='post' action='login.php'>
+        <form class="form" method='post' >
             <input type='email' name='email' placeholder='Votre email' required>
             <input type='password' name='mdpasse' placeholder='votre mot de passe' required>
             <button type='submit'>Connectez vous</button>
@@ -70,7 +71,7 @@ $conn->close();
 
     </main>
 
-    <footer>
+    <footer class='footer'>
 
         <p>created by Abdelkrim 10/24</p>
     </footer>

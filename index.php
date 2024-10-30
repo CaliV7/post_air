@@ -13,7 +13,7 @@ if((isset($_SESSION['user_id'])) && (isset($_POST['titre'])) && (isset($_POST['c
     
 
 // inscription des données dans la tables posts de la bdd
-    if($conn->query("insert into posts(user_id,titre,contenu) values('$user_id','$titre','$contenu')")){
+    if($conn->query("insert into posts (user_id,titre,contenu) values ('$user_id','$titre','$contenu')")){
     echo 'Félicitation votre Post est maintenant publié';
 }else{
     echo 'Désolé,votre Post ne peut pas etre publié';
@@ -36,7 +36,7 @@ $conn->close();
 </head>
 
 <body>
-    <header>
+    <header class='header'>
 
         <nav>
             <ul>
@@ -63,11 +63,13 @@ $conn->close();
         <h2>POSTS</h2>
         
             
-            
+            <?php
+            require ('posts.php');
+            ?>
 
     </main>
 
-    <footer>
+    <footer class='footer'>
 
         <p>created by Abdelkrim 10/24</p>
     </footer>

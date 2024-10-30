@@ -37,7 +37,7 @@ $conn->close();
 </head>
 
 <body>
-    <header>
+    <header class='header'>
 
         <nav>
             <ul>
@@ -55,7 +55,7 @@ $conn->close();
 
         <p>remplissez les champs ci dessous pour creer votre compte et commencer à poster</p>
 
-        <form class='form' method='post' action='inscription.php'>
+        <form class='form' method='post' >
             <input type='text' name='nom' placeholder='Votre nom' required>
             <input type='email' name='email' placeholder='votre email' required>
             <input type='int' name='age' placeholder="Votre age" required>
@@ -66,7 +66,7 @@ $conn->close();
         </form>
     </main>
 
-    <footer>
+    <footer class='footer'>
 
         <p>created by Abdelkrim 10/24</p>
     </footer>

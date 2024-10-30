@@ -20,7 +20,7 @@ session_destroy();
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
+<header class='header'>
 
 <nav>
 <ul>
@@ -38,7 +38,7 @@ vous etes déconnecté, vous pouvez vous reconnecté <a href='login.php' Login>L
 
 </main>
 
-<footer >
+<footer class='footer'>
 
 <p>created by Abdelkrim 10/24</p>
 </footer>
