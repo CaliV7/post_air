@@ -20,7 +20,7 @@ if((isset($_POST['email'])) && (isset($_POST['mdpasse']))){
     if($user && password_verify ($password,$user['mdpasse'])){
         $_SESSION['nom']=$user['nom'];
         $_SESSION['id']=$user['id'];
-        echo "bonjour " .$_SESSION['nom']. " vous étes bien connecté";
+        echo "bonjour " . htmlspecialchars($_SESSION['nom']). " vous étes bien connecté";
         header('location:index.php');
     }else{
          echo 'email ou mot de passe incorrect';             

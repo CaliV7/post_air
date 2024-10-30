@@ -57,7 +57,7 @@ if((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conten
     </header>
     <main>
 
-    <h1>Bienvenue <?php echo $nom ?> chez POST'AIR</h1>
+    <h1>Bienvenue <?php echo htmlspecialchars($nom) ?> chez POST'AIR</h1>
         <form class='form' method='post' action='index.php'>
             <input type='text' name='titre' placeholder="entrer un titre" required>
             <textarea  name='contenu' placeholder="votre post" required></textarea>
