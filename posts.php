@@ -9,9 +9,9 @@ require ('connexion_bdd.php');
    // affiche les posts
    while($row=$stmt->fetch(PDO::FETCH_ASSOC)){
     echo "<div class='post'>";
-    echo "<h3>". htmlspecialchars($row['titre'])."</h3>" ;
-    echo "post: ". htmlspecialchars($row['contenu']);
-    echo "posté par: " . htmlspecialchars($row['nom']);
+    echo "<h3>". htmlentities($row['titre'])."</h3>" ;
+    echo "post: ". htmlentities($row['contenu']);
+    echo "posté par: " . htmlentities($row['nom']);
     echo "</div>";
    
    }

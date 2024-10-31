@@ -6,7 +6,7 @@ CREATE TABLE users(
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   email varchar(100) not null,
   nom VARCHAR(100) NOT NULL,
-  mdpasse VARCHAR(50) NOT NULL,
+  mdpasse VARCHAR(100) NOT NULL,
   age int(2),
   ville varchar(50),
   date_inscription datetime default current_timestamp

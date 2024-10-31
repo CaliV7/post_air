@@ -24,7 +24,8 @@ if((isset($_POST['nom']))&&(isset($_POST['email']))&&(isset($_POST['age']))&&(is
             // ajout des variables de valeurs
         $stmt->execute([$nom,$email,$age,$ville,$hashedPassword]);
             // message de reussite
-         echo "Félicitation  $nom  vous étes maintenant inscris à POSTAIR. Connectez vous pour consulter et envoyer des posts";
+         echo "Félicitation ". htmlentities($nom) ." vous étes maintenant inscris à POSTAIR. Connectez vous pour consulter et envoyer des posts";
+         header('location:login.php');
         } 
     }else{
         echo 'Merci de remplir tous les champs';
