@@ -47,7 +47,8 @@ if((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conten
             <ul>
                 
                 <a href='Login.php'>Login</a>
-                <a href='Index.php'>Post</a>
+                <a href='modifier.php'>Modifier mon profil</a>
+                <a href='supprimer.php'>supprimer mon profil</a>
                 <a href='Logout.php'>Déconnexion</a>
             </ul>
 
