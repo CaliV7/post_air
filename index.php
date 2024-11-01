@@ -1,26 +1,26 @@
 <?php
 //lancement d'une session pour garder les infos de connexion 
 session_start();
-if(isset($_SESSION['nom'])){
-    $nom=$_SESSION['nom'];
+if (isset($_SESSION['nom'])) {
+    $nom = $_SESSION['nom'];
 }
 
 
 // connexion à la bdd en pdo
-require ('connexion_bdd.php');
+require('connexion_bdd.php');
 
 // verification des données post et session a mettre dans la table post de la bdd
-if((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))){
-    $user_id=$_SESSION['id'];
+if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))) {
+    $user_id = $_SESSION['id'];
 
-    $titre=$_POST['titre'];
-    $contenu=$_POST['contenu'];  
+    $titre = $_POST['titre'];
+    $contenu = $_POST['contenu'];
 
 
-//  preparation de la requete pour l'inscription des données dans la bdd
-    $stmt=$pdo->prepare('insert into posts (user_id,titre,contenu) values (?,?,?)');
+    //  preparation de la requete pour l'inscription des données dans la bdd
+    $stmt = $pdo->prepare('insert into posts (user_id,titre,contenu) values (?,?,?)');
     //ajout des variables de valeurs dans la requete
-    $stmt->execute([$user_id,$titre,$contenu]);
+    $stmt->execute([$user_id, $titre, $contenu]);
 
     echo 'Félicitation votre Post est maintenant publié';
 }
@@ -42,42 +42,47 @@ if((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conten
 
 <body>
     <header class='header'>
+        <div class='titre_header'>
+            <h1>POST'R</h1> <!--a remplacer par logo -->
+        </div>
+        <div class='header_titre'>
+            <h1>Bienvenue
+                <?php if (isset($nom)) {
+                    echo htmlentities($nom);
+                }
+                ?>
+                chez POST'R</h1>
+        </div>
+        <div class='profil'>
+            <a href="profil.php">Mon profil</a>
+            <a href=''>Se déconnecter</a>
+        </div>
 
-        <nav>
-            <ul>
-                
-                <a href='Login.php'>Login</a>
-                <a href='modifier.php'>Modifier mon profil</a>
-                <a href='supprimer.php'>supprimer mon profil</a>
-                <a href='Logout.php'>Déconnexion</a>
-            </ul>
-
-        </nav>
-        
-        
     </header>
     <main>
+        <div class='image'>
+            <img src="image/IMG_2767.jpeg" alt="">
+        </div>
 
-    <h1>Bienvenue 
-        <?php if(isset($nom)){
-        echo htmlentities($nom);
-    } 
-        ?>
-         chez POST'AIR</h1>
+        <div class='posts'>
+            <h2 class='main_titre'>POSTS</h2>
+            <nav>
+                <ul class='main_nav'>
 
-        <form class='form' method='post' action='index.php'>
-            <input type='text' name='titre' placeholder="entrer un titre" required>
-            <textarea  name='contenu' placeholder="votre post" required></textarea>
-            <button type='submit'>Poster</button>
+                    <a href=''>Devinette</a>
+                    <a href=''>charade</a>
+                    <a href=''>blague</a>
+                    <a href=''>blague pourrie</a>
 
-        </form>
+                </ul>
 
-        <h2>POSTS</h2>
-        
+            </nav>
+
+                <?php
+                require('posts.php');
+                ?>
             
-            <?php
-            require ('posts.php');
-            ?>
+        </div>
 
     </main>
 

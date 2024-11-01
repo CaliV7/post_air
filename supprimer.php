@@ -6,7 +6,7 @@ include 'connexion_bdd.php';
 
 // verif que le user est bien connecté par avec son id sinon renvoi àla page de connexion
 if (!isset($_SESSION['id'])) {
-    header("Location: connexion.php");
+    header("Location: login.php");
     exit;
 }
 
