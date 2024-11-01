@@ -27,8 +27,6 @@ if((isset($_POST['nom']))&&(isset($_POST['email']))&&(isset($_POST['age']))&&(is
          echo "Félicitation ". htmlentities($nom) ." vous étes maintenant inscris à POSTAIR. Connectez vous pour consulter et envoyer des posts";
          header('location:login.php');
         } 
-    }else{
-        echo 'Merci de remplir tous les champs';
     }
 ?>
 
