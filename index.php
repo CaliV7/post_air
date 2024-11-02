@@ -45,17 +45,18 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
         <div class='titre_header'>
             <h1>POST'R</h1> <!--a remplacer par logo -->
         </div>
-        <div class='header_titre'>
-            <h1>Bienvenue
-                <?php if (isset($nom)) {
-                    echo htmlentities($nom);
-                }
-                ?>
-                chez POST'R</h1>
-        </div>
+        <nav>
+                <ul class='header_nav'>
+
+                    <a href=''>Devinette</a>
+                    <a href=''>charade</a>
+                    <a href=''>blague</a>
+                    <a href=''>blague pourrie</a>
+                </ul>
+            </nav>
         <div class='profil'>
             <a href="profil.php">Mon profil</a>
-            <a href=''>Se déconnecter</a>
+            <a href='logout.php'>Se déconnecter</a>
         </div>
 
     </header>
@@ -65,18 +66,16 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
         </div>
 
         <div class='posts'>
-            <h2 class='main_titre'>POSTS</h2>
-            <nav>
-                <ul class='main_nav'>
-
-                    <a href=''>Devinette</a>
-                    <a href=''>charade</a>
-                    <a href=''>blague</a>
-                    <a href=''>blague pourrie</a>
-
-                </ul>
-
-            </nav>
+            
+            <div class='main_titre'>
+            <h1>Bienvenue
+                <?php if (isset($nom)) {
+                    echo htmlentities($nom);
+                }
+                ?>
+                chez POST'R</h1>
+            </div>
+            
 
                 <?php
                 require('posts.php');

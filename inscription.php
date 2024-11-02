@@ -60,12 +60,12 @@ if((isset($_POST['nom']))&&(isset($_POST['email']))&&(isset($_POST['age']))&&(is
         <p>remplissez les champs ci dessous pour creer votre compte et commencer à poster</p>
 
         <form class='form' method='post' >
-            <input type='text' name='nom' placeholder='Votre nom' required>
-            <input type='email' name='email' placeholder='votre email' required>
-            <input type='int' name='age' placeholder="Votre age" required>
-            <input type='text' name='ville' placeholder="Votre ville" required>
-            <input type='password' name='mdpasse' placeholder="Votre mot de passe" required>
-            <button type='submit'>Envoyer</button>
+            <input class='colonne_form' type='text' name='nom' placeholder='Votre nom' required>
+            <input class='colonne_form' type='email' name='email' placeholder='votre email' required>
+            <input class='colonne_form' type='int' name='age' placeholder="Votre age" required>
+            <input class='colonne_form' type='text' name='ville' placeholder="Votre ville" required>
+            <input class='colonne_form' type='password' name='mdpasse' placeholder="Votre mot de passe" required>
+            <button class='colonne_form' type='submit'>Envoyer</button>
             
         </form>
     </main>
