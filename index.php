@@ -22,7 +22,9 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
     //ajout des variables de valeurs dans la requete
     $stmt->execute([$user_id, $titre, $contenu]);
 
-    echo 'Félicitation votre Post est maintenant publié';
+    /* a revoir pb l'affichage du msg qd on raffraichi la page si non redirigé
+    echo 'Félicitation votre Post est maintenant publié';*/
+    header('location:index.php');
 }
 
 
@@ -43,45 +45,64 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
 <body>
     <header class='header'>
         <div class='titre_header'>
-            <h1>POST'R</h1> <!--a remplacer par logo -->
+    <!-- a remplacer par le logo -->
+            <h1>POST'R le site contre l'ennui</h1>
         </div>
-        <nav>
-                <ul class='header_nav'>
 
-                    <a href=''>Devinette</a>
-                    <a href=''>charade</a>
-                    <a href=''>blague</a>
-                    <a href=''>blague pourrie</a>
-                </ul>
-            </nav>
-        <div class='profil'>
+        <div class='header_lien'>
             <a href="profil.php">Mon profil</a>
             <a href='logout.php'>Se déconnecter</a>
         </div>
 
     </header>
     <main>
-        <div class='image'>
-            <img src="image/IMG_2767.jpeg" alt="">
+        <h1>Bienvenue
+            <?php if (isset($nom)) {
+                echo htmlentities($nom);
+            }
+            ?>
+            chez POST'R</h1>
+
+        <div class='main_page'>
+            <div>
+                <img class='image_brebis' src="image/IMG_2767.jpeg" alt="">
+            </div>
+
+           
+            <div>
+        <form class='form' method='post'>
+            <label  for="titre">Choisissez un titre :</label>
+            <select class='colonne_form' name="titre">
+                <option value="Devinette">Devinette</option>
+                <option value="Charade">Charade</option>
+                <option value="Blague">Blague</option>
+                <option value="Blague pourrie">Blague pourrie</option>
+            </select>
+            <textarea name='contenu' placeholder="votre post" required></textarea>
+            <button class='colonne_form' class='bouton' type='submit'>Poster</button>
+        </form>
         </div>
 
+        </div>   
+       
         <div class='posts'>
-            
-            <div class='main_titre'>
-            <h1>Bienvenue
-                <?php if (isset($nom)) {
-                    echo htmlentities($nom);
+                <?php
+                // connexion à la bdd en pdo
+                require('connexion_bdd.php');
+
+                // joint les tables users et posts avec le id de users et le user_id de posts
+                $stmt = $pdo->query("select * from posts left join users on posts.user_id=users.id ORDER BY date_post DESC");
+                // affiche les posts
+                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                    echo "<div class='post'>";
+                    echo "<h3>" . htmlentities($row['titre']) . "</h3>" . "<br>";
+                    echo  htmlentities($row['contenu']) . "<br>" . "<br>";
+                    echo "Posté par: " . htmlentities($row['nom']);
+                    echo "</div>";
+                    
                 }
                 ?>
-                chez POST'R</h1>
             </div>
-            
-
-                <?php
-                require('posts.php');
-                ?>
-            
-        </div>
 
     </main>
 

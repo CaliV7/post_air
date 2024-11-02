@@ -3,10 +3,11 @@
   padding: 0;
   text-decoration: none;
   list-style: none;
-  font-family: Arial, Helvetica, sans-serif; 
+  font-family: Arial, Helvetica, sans-serif;
 }
+
 .header {
-  background-color: rgb(108, 174, 117);
+  background-color: rgb(81, 131, 89);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -14,18 +15,12 @@
   font-weight: bold;
   padding: 20px;
 }
+
 .titre_header {
   margin-left: 20px;
 }
-.header_nav {
-  background-color: white;
-  display: flex;
-  gap: 50px;
-  font-size: 25px;
-  border-radius: 5px;
-  padding: 5px;
-}
-.profil {
+
+.header_lien {
   display: flex;
   flex-direction: column;
   margin-right: 20px;
@@ -33,30 +28,50 @@
   font-size: 25px;
 }
 
-main { 
-  display: flex;
-  
-  
-}
-.posts {
-  width: 100%;
+main {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  background-color: rgba(11, 240, 99, 0.485);
-  justify-content: space-around;
+  
+  gap: 45px;
+  background-color: rgb(146, 238, 158);
+  ;
+
 }
 
-.post{
+.main_page {
   display: flex;
-  flex-direction: column;
-  background-color: white;
+  justify-content: space-around;
+  font-size: 20px;
+
+}
+
+.image_brebis {
+ height:450px ;
+ width: 550px;
+
+}
+
+.posts {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;  
   border-radius: 5px;
   gap: 30px;
   font-size: 20px;
-   
-  
+  overflow-y: scroll;
+  height: 600px;
+
 }
+
+.post {
+  background-color: white;
+  border-radius: 1px;
+  width: 500px;
+  height: 250px;
+  overflow-y: scroll;
+
+}
+
 .form {
   display: flex;
   justify-content: center;
@@ -64,26 +79,43 @@ main {
   gap: 30px;
   padding: 30px;
   width: 200px;
-  
+
 }
-.colonne_form{
+
+.colonne_form {
   height: 30px;
   font-size: 20px;
+  
 }
-.inscription{
+.form_inscription{
+  display: flex;
+  justify-content: center;
+  
+}
+.inscription {
+  display: flex;
+  
   font-size: 20px;
   font-weight: bold;
   font-style: italic;
+
 }
+.profil{
+  display: flex;
+
+}
+
 .footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgb(108, 174, 117);
+  background-color: rgb(81, 131, 89);
   padding: 20px;
-  
+
+
 }
-.header_login{
+
+.header_login {
   background-color: rgb(108, 174, 117);
   display: flex;
   justify-content: center;
@@ -91,18 +123,25 @@ main {
   font-weight: bold;
   padding: 20px;
 }
-.main_login{
+
+.image_ognion {
+  width: 450px;
+  height: 500px;
+}
+.suprrimer_profil{
   display: flex;
+  flex-direction: column;
+  gap: 80px;
   align-items: center;
-  height: 517px;
   
 }
-.image_ognion{
-  width: 350px;
-  height: 400px;
-}
-.connex_login{
+.deconnexion{
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+
+  gap: 50px;
+  height: 480px;
+  font-size: 35px;
 }

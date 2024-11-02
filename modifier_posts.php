@@ -7,7 +7,7 @@ if (!isset($_SESSION['id'])) {
 }
 
 $user_id = $_SESSION['id'];
-$stmt = $pdo->prepare("select * from users where id= ?");
+$stmt = $pdo->prepare("select * from posts where id= ?");
 $stmt->execute([$user_id]);
 $user = $stmt->fetch();
 

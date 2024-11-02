@@ -40,22 +40,25 @@ if ((isset($_POST['email'])) && (isset($_POST['mdpasse']))) {
 </head>
 
 <body>
-    <header class='header_login'>
-        <h1>Bienvenue chez POST'R</h1>
+    <header class='header'>
+    <h1>POST'R le site contre l'ennui</h1>
     </header>
 
-    <main class='main_login'>
-        <div>
-            <img class="image_ognion" src="image/IMG_2768.jpeg" alt="">
+    <main class='main'>
+        <div><h1>Connecte toi chez POST'R</h1>
         </div>
-        <div class='connex_login'>
-            <h2>Connecte toi et publie tes meilleures blagues</h2>
+        <div class='main_page'>
+            <img class="image_ognion" src="image/IMG_2768.jpeg" alt="">
+        
+        
+            <div>
             <form class="form" method='post' action='login.php'>
                 <input class='colonne_form' type='email' name='email' placeholder='Email' required>
                 <input class='colonne_form' type='password' name='mdpasse' placeholder='Mot de passe' required>
                 <button class='colonne_form' type='submit'>Connecte toi</button>
             </form>
             <a class='inscription' href="inscription.php">Pas encore de compte, tu peux t'inscrire ici </a>
+            </div>
         </div>
 
     </main>
