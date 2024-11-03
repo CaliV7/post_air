@@ -29,9 +29,9 @@ $user_posts = $posts->fetchAll(PDO::FETCH_ASSOC);
 
 //modifier le profil user
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modif_profil'])) {
-    $nom = $_POST['nom'];
-    $age = $_POST['age'];
-    $ville = $_POST['ville'];
+    $nom = htmlentities(trim($_POST['nom']));
+    $age = htmlentities(trim($_POST['age']));
+    $ville = htmlentities(trim($_POST['ville']));
     $stmt = $pdo->prepare("UPDATE users SET nom=?,age=?,ville=? WHERE id=? ");
     $stmt->execute([$nom, $age, $ville, $user_id]);
 
@@ -53,20 +53,22 @@ if (isset($_POST['suppr_profil'])) {
 
     // fin de session et redirection sur login
     session_unset();
+    session_destroy();
     header('location:login.php');
     exit();
 }
 
 // recuperer les posts users
-$posts = $pdo->prepare("SELECT * FROM posts where user_id=?");
+$posts = $pdo->prepare("SELECT * FROM posts where user_id=? ORDER BY date_post DESC");
 $posts->execute([$user_id]);
 $user_posts = $posts->fetchAll(PDO::FETCH_ASSOC);
 
 //modifier les posts
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modif_post'])) {
     $post_id = $_POST['post_id'];
-    $titre = $_POST['titre'];
-    $contenu = $_POST['contenu'];
+    $titre = htmlentities(trim($_POST['titre']));
+    $contenu = htmlentities(trim($_POST['contenu']));
+    
     $stmt = $pdo->prepare("UPDATE posts SET titre=?,contenu=? WHERE id=?");
     $stmt->execute(["$titre", "$contenu", "$post_id"]);
     header('location:profil.php');
@@ -109,9 +111,9 @@ if (isset($_POST['suppr_post'])) {
             <div>
                 <H2>Modifier vos infos</H2>
                 <form class='form' method='post'>
-                    <input class="colonne_form" type='text' name='nom' value="<?php echo htmlentities($nom); ?>" required>
-                    <input class="colonne_form" type='number' name='age' value="<?php echo htmlentities($age); ?>" required>
-                    <input class="colonne_form" type='text' name='ville' value="<?php echo htmlentities($ville); ?>" required>
+                    <input class="colonne_form" type='text' name='nom' value="<?php echo htmlentities(trim($nom)); ?>" required>
+                    <input class="colonne_form" type='number' name='age' value="<?php echo htmlentities(trim($age)); ?>" required>
+                    <input class="colonne_form" type='text' name='ville' value="<?php echo htmlentities(trim($ville)); ?>" required>
                     <button class="colonne_form" type='submit' name="modif_profil">Modifier</button>
                 </form>
             </div>
@@ -137,7 +139,7 @@ if (isset($_POST['suppr_post'])) {
                             <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>"> <!-- Ajout d'un champ caché pour l'ID du post -->
                             <input class="colonne_form" type='text' name='titre' value="<?php echo htmlentities($post['titre']); ?>" required>
                             <br><br>
-                            <textarea class="form_contenu_profil" name='contenu' required>"<?php echo htmlentities($post['contenu']); ?>" </textarea>
+                            <textarea class="form_contenu_profil" name='contenu' required>"<?php echo htmlentities(trim($post['contenu'])); ?>" </textarea>
                             <button class='colonne_form' type='submit' name='modif_post'>Modifier</button>
                             <button class='colonne_form' type='submit' name='suppr_post'>Supprimer</button>
 

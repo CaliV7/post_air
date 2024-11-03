@@ -16,7 +16,7 @@ CREATE TABLE posts(
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
   user_id int,
   titre varchar(255),
-  contenu varchar(255),
+  contenu text(500),
   date_post datetime default current_timestamp,
   FOREIGN KEY(user_id)REFERENCES users(id)
   );

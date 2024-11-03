@@ -9,15 +9,19 @@ require('connexion_bdd.php');
 
 if (isset($_SESSION['user_id'])) {
     header('location:index.php');
+    exit();
 }
 
 // verification des données post et session a mettre dans la table post de la bdd
 if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))) {
     $user_id = $_SESSION['id'];
-    $titre = $_POST['titre'];
-    $contenu = $_POST['contenu'];
+    $titre = trim($_POST['titre']);
+    $contenu = trim($_POST['contenu']);
 
-
+    if(strlen($titre) >200 || strlen($contenu)>500){
+        echo "Le titre(max200) ou le contenu(max500) est trop long";
+        exit();
+    }
     //  preparation de la requete pour l'inscription des données dans la bdd
     $stmt = $pdo->prepare('insert into posts (user_id,titre,contenu) values (?,?,?)');
     //ajout des variables de valeurs dans la requete
@@ -27,8 +31,9 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
     echo 'Félicitation votre Post est maintenant publié';*/
     header('location:index.php');
     exit();
-}
+    }   
 
+//recuperation des posts dans l'ordre de date decroissant
 $post = $pdo->query("select * from posts join users on posts.user_id =users.id ORDER BY date_post DESC ");
 $posts = $post->fetchAll(PDO::FETCH_ASSOC);
 
@@ -85,11 +90,11 @@ $posts = $post->fetchAll(PDO::FETCH_ASSOC);
                 <div class='posts'>
                     <?php foreach ($posts as $post): ?>
                         <div class='post'>
-                            <p><strong><?php echo htmlspecialchars($post['titre']); ?></strong></p>
+                            <p><strong><?php echo htmlentities($post['titre']); ?></strong></p>
                             <p><br></p>
-                            <p><?php echo htmlspecialchars($post['contenu']); ?></p>
+                            <p><?php echo htmlentities($post['contenu']); ?></p>
                             <p><br></p>
-                            <p>Publié par <?php echo htmlspecialchars($post['nom']); ?> </p>
+                            <p>Publié par <?php echo htmlentities($post['nom']); ?> </p>
 
                         </div>
                     <?php endforeach; ?>

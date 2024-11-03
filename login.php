@@ -7,8 +7,8 @@ require('connexion_bdd.php');
 
 // verification que  mail et mdpasse de l'utilisateur sont en post 
 if ((isset($_POST['email'])) && (isset($_POST['mdpasse']))) {
-    $email = $_POST['email'];
-    $password = $_POST['mdpasse'];
+    $email = filter_var(trim($_POST['email']));
+    $password = htmlentities($_POST['mdpasse']);
 
     // creation de la requete en pdo
 
@@ -18,9 +18,10 @@ if ((isset($_POST['email'])) && (isset($_POST['mdpasse']))) {
 
     // verification que le mdpasse de la bdd correspond au mdp du post
     if ($user && password_verify($password, $user['mdpasse'])) {
-        $_SESSION['nom'] = $user['nom'];
-        $_SESSION['id'] = $user['id'];
+        $_SESSION['nom'] = htmlentities($user['nom']);
+        $_SESSION['id'] = htmlentities($user['id']);
         header('location:index.php');
+        exit();
     } else {
         echo 'email ou mot de passe incorrect';
     }

@@ -7,7 +7,7 @@
 }
 
 .header {
-  background-color: rgb(157, 217, 245);
+  background: linear-gradient( #fbaf9d, #f4dd80);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -31,10 +31,9 @@
 main {
   display: flex;
   flex-direction: column;
-  
   gap: 45px;
-  background-color: rgb(158, 190, 245);
-  ;
+  background: linear-gradient( #a6dded, #5abcf1);
+  
 
 }
 h1{
@@ -73,6 +72,7 @@ h1{
   width: 450px;
   height: 220px;
   padding: 5px;
+  overflow-y: auto;
   
 
 }
@@ -157,7 +157,7 @@ h1{
   display: flex;
   justify-content: end;
   align-items: center;
-  background-color: rgb(22, 66, 198);
+  background: linear-gradient( #fbaf9d, #f4dd80);
   padding: 10px;
 
 

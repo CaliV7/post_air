@@ -3,11 +3,16 @@ require('connexion_bdd.php');
 
 //verification que les données user sont bien en POST
 if ((isset($_POST['nom'])) && (isset($_POST['email'])) && (isset($_POST['age'])) && (isset($_POST['ville'])) && (isset($_POST['mdpasse']))) {
-    $nom = $_POST['nom'];
-    $email = $_POST['email'];
-    $age = $_POST['age'];
-    $ville = $_POST['ville'];
+    $nom = htmlentities(trim($_POST['nom']));
+    $email = filter_var(trim($_POST['email']));
+    $age = filter_var(trim($_POST['age']));
+    $ville = htmlentities(trim($_POST['ville']));
     $password = $_POST['mdpasse'];
+
+    if($age===false||$age<1||$age>120){
+        echo "Age invalide";
+        exit();
+    }
 
 
     // controle que l'email n'est pas deja existant sinon msg d'erreur
@@ -26,6 +31,7 @@ if ((isset($_POST['nom'])) && (isset($_POST['email'])) && (isset($_POST['age']))
         // message de reussite
         echo "Félicitation " . htmlentities($nom) . " vous étes maintenant inscris à POSTAIR. Connectez vous pour consulter et envoyer des posts";
         header('location:login.php');
+        exit();
     }
 }
 ?>
