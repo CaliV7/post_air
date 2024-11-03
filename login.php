@@ -20,7 +20,6 @@ if ((isset($_POST['email'])) && (isset($_POST['mdpasse']))) {
     if ($user && password_verify($password, $user['mdpasse'])) {
         $_SESSION['nom'] = $user['nom'];
         $_SESSION['id'] = $user['id'];
-        echo "bonjour " . htmlentities($_SESSION['nom']) . " vous étes bien connecté";
         header('location:index.php');
     } else {
         echo 'email ou mot de passe incorrect';
@@ -41,23 +40,24 @@ if ((isset($_POST['email'])) && (isset($_POST['mdpasse']))) {
 
 <body>
     <header class='header'>
-    <h1>POST'R le site contre l'ennui</h1>
+        <h1>POST'R le site contre l'ennui</h1>
     </header>
 
     <main class='main'>
-        <div><h1>Connecte toi chez POST'R</h1>
+        <div>
+            <h1>Connecte toi chez POST'R</h1>
         </div>
         <div class='main_page'>
             <img class="image_ognion" src="image/IMG_2768.jpeg" alt="">
-        
-        
+
             <div>
-            <form class="form" method='post' action='login.php'>
-                <input class='colonne_form' type='email' name='email' placeholder='Email' required>
-                <input class='colonne_form' type='password' name='mdpasse' placeholder='Mot de passe' required>
-                <button class='colonne_form' type='submit'>Connecte toi</button>
-            </form>
-            <a class='inscription' href="inscription.php">Pas encore de compte, tu peux t'inscrire ici </a>
+                <form class="form" method='post' action='login.php'>
+                    <input class='colonne_form' type='email' name='email' placeholder='Email' required>
+                    <input class='colonne_form' type='password' name='mdpasse' placeholder='Mot de passe' required>
+                    <button class='colonne_form' type='submit'>Connecte toi</button>
+                
+                <a class='inscription' href="inscription.php">Pas encore de compte, tu peux t'inscrire ici </a>
+                </form>
             </div>
         </div>
 

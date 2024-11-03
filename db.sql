@@ -17,10 +17,14 @@ CREATE TABLE posts(
   user_id int,
   titre varchar(255),
   contenu varchar(255),
-  date_post datetime default current_timestamp
-);
-CREATE TABLE likes(
+  date_post datetime default current_timestamp,
+  FOREIGN KEY(user_id)REFERENCES users(id)
+  );
+
+ CREATE TABLE likes(
   id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+  user_id int,
   post_id int,
-  user_id int  
-);
+  FOREIGN KEY(user_id)REFERENCES users(id),
+  FOREIGN KEY(post_id)REFERENCES posts(id)
+ )

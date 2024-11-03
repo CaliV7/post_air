@@ -1,18 +1,19 @@
 <?php
 //lancement d'une session pour garder les infos de connexion 
 session_start();
-if (isset($_SESSION['nom'])) {
-    $nom = $_SESSION['nom'];
-}
-
-
 // connexion à la bdd en pdo
 require('connexion_bdd.php');
+
+
+
+
+if (isset($_SESSION['user_id'])) {
+    header('location:index.php');
+}
 
 // verification des données post et session a mettre dans la table post de la bdd
 if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['contenu']))) {
     $user_id = $_SESSION['id'];
-
     $titre = $_POST['titre'];
     $contenu = $_POST['contenu'];
 
@@ -25,9 +26,11 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
     /* a revoir pb l'affichage du msg qd on raffraichi la page si non redirigé
     echo 'Félicitation votre Post est maintenant publié';*/
     header('location:index.php');
+    exit();
 }
 
-
+$post = $pdo->query("select * from posts join users on posts.user_id =users.id ORDER BY date_post DESC ");
+$posts = $post->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
@@ -45,7 +48,7 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
 <body>
     <header class='header'>
         <div class='titre_header'>
-    <!-- a remplacer par le logo -->
+            <!-- a remplacer par le logo -->
             <h1>POST'R le site contre l'ennui</h1>
         </div>
 
@@ -57,52 +60,41 @@ if ((isset($_SESSION['id'])) && (isset($_POST['titre'])) && (isset($_POST['conte
     </header>
     <main>
         <h1>Bienvenue
-            <?php if (isset($nom)) {
-                echo htmlentities($nom);
-            }
-            ?>
+            <?php echo htmlentities($_SESSION['nom']); ?>
             chez POST'R</h1>
 
         <div class='main_page'>
-            <div>
-                <img class='image_brebis' src="image/IMG_2767.jpeg" alt="">
+
+            <div class='publi_contenu'>
+                <form class='form' method='post'>
+                    <label for="titre">Choisissez un titre :</label>
+                    <select class='colonne_form' name="titre">
+                        <option value="Devinette">Devinette</option>
+                        <option value="Charade">Charade</option>
+                        <option value="Blague">Blague</option>
+                        <option value="Blague pourrie">Blague pourrie</option>
+                    </select>
+                    <textarea class='form_contenu' name='contenu' placeholder="votre post" required></textarea>
+                    <button class='colonne_form' class='bouton' type='submit'>Poster</button>
+                </form>
             </div>
 
+
+            
+                
+                <div class='posts'>
+                    <?php foreach ($posts as $post): ?>
+                        <div class='post'>
+                            <p><strong><?php echo htmlspecialchars($post['titre']); ?></strong></p>
+                            <p><br></p>
+                            <p><?php echo htmlspecialchars($post['contenu']); ?></p>
+                            <p><br></p>
+                            <p>Publié par <?php echo htmlspecialchars($post['nom']); ?> </p>
+
+                        </div>
+                    <?php endforeach; ?>
+                </div>
            
-            <div>
-        <form class='form' method='post'>
-            <label  for="titre">Choisissez un titre :</label>
-            <select class='colonne_form' name="titre">
-                <option value="Devinette">Devinette</option>
-                <option value="Charade">Charade</option>
-                <option value="Blague">Blague</option>
-                <option value="Blague pourrie">Blague pourrie</option>
-            </select>
-            <textarea name='contenu' placeholder="votre post" required></textarea>
-            <button class='colonne_form' class='bouton' type='submit'>Poster</button>
-        </form>
-        </div>
-
-        </div>   
-       
-        <div class='posts'>
-                <?php
-                // connexion à la bdd en pdo
-                require('connexion_bdd.php');
-
-                // joint les tables users et posts avec le id de users et le user_id de posts
-                $stmt = $pdo->query("select * from posts left join users on posts.user_id=users.id ORDER BY date_post DESC");
-                // affiche les posts
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<div class='post'>";
-                    echo "<h3>" . htmlentities($row['titre']) . "</h3>" . "<br>";
-                    echo  htmlentities($row['contenu']) . "<br>" . "<br>";
-                    echo "Posté par: " . htmlentities($row['nom']);
-                    echo "</div>";
-                    
-                }
-                ?>
-            </div>
 
     </main>
 

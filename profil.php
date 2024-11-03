@@ -1,8 +1,85 @@
 <?php
 session_start();
-require('modifier.php');
 
-require('supprimer.php');
+require('connexion_bdd.php');
+
+if (isset($_SESSION['user_id'])) {
+    header('location:login.php');
+    exit;
+}
+
+// recuperer les infos users
+$user_id = $_SESSION['id'];
+$stmt = $pdo->prepare("SELECT * FROM users where id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch();
+
+if ($user) {
+    $nom = $user['nom'] ?? '';
+    $age = $user['age'] ?? '';
+    $ville = $user['ville'] ?? '';
+} else {
+    $nom = $age = $ville = '';
+}
+
+// recuperer les posts users
+$posts = $pdo->prepare("SELECT * FROM posts where user_id=?");
+$posts->execute([$user_id]);
+$user_posts = $posts->fetchAll(PDO::FETCH_ASSOC);
+
+//modifier le profil user
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modif_profil'])) {
+    $nom = $_POST['nom'];
+    $age = $_POST['age'];
+    $ville = $_POST['ville'];
+    $stmt = $pdo->prepare("UPDATE users SET nom=?,age=?,ville=? WHERE id=? ");
+    $stmt->execute([$nom, $age, $ville, $user_id]);
+
+    $_SESSION['nom'] = $nom;
+    header('location:profil.php');
+    exit();
+}
+
+//suppression du compte et des posts associés
+if (isset($_POST['suppr_profil'])) {
+
+    //suppression des posts
+    $stmt = $pdo->prepare("DELETE FROM posts WHERE user_id=? ");
+    $stmt->execute([$user_id]);
+
+    // suppression du compte
+    $stmt = $pdo->prepare("DELETE FROM users WHERE id=? ");
+    $stmt->execute([$user_id]);
+
+    // fin de session et redirection sur login
+    session_unset();
+    header('location:login.php');
+    exit();
+}
+
+// recuperer les posts users
+$posts = $pdo->prepare("SELECT * FROM posts where user_id=?");
+$posts->execute([$user_id]);
+$user_posts = $posts->fetchAll(PDO::FETCH_ASSOC);
+
+//modifier les posts
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['modif_post'])) {
+    $post_id = $_POST['post_id'];
+    $titre = $_POST['titre'];
+    $contenu = $_POST['contenu'];
+    $stmt = $pdo->prepare("UPDATE posts SET titre=?,contenu=? WHERE id=?");
+    $stmt->execute(["$titre", "$contenu", "$post_id"]);
+    header('location:profil.php');
+    exit();
+}
+//supprimer post
+if (isset($_POST['suppr_post'])) {
+    $post_id = $_POST['post_id'];
+    $stmt = $pdo->prepare("DELETE FROM posts WHERE id=?");
+    $stmt->execute([$post_id]);
+    header('location:profil.php');
+    exit();
+}
 ?>
 
 
@@ -32,10 +109,10 @@ require('supprimer.php');
             <div>
                 <H2>Modifier vos infos</H2>
                 <form class='form' method='post'>
-                    <input class="colonne_form" type='text' name='nom' value="<?= htmlentities($user['nom']) ?>" required>
-                    <input class="colonne_form" type='int' name='age' value="<?= htmlentities($user['age']) ?>" required>
-                    <input class="colonne_form" type='text' name='ville' value="<?= htmlentities($user['ville']) ?>" required>
-                    <button class="colonne_form" type='submit'>Modifier</button>
+                    <input class="colonne_form" type='text' name='nom' value="<?php echo htmlentities($nom); ?>" required>
+                    <input class="colonne_form" type='number' name='age' value="<?php echo htmlentities($age); ?>" required>
+                    <input class="colonne_form" type='text' name='ville' value="<?php echo htmlentities($ville); ?>" required>
+                    <button class="colonne_form" type='submit' name="modif_profil">Modifier</button>
                 </form>
             </div>
             <div class='suprrimer_profil'>
@@ -43,32 +120,38 @@ require('supprimer.php');
                 <form method="post">
                     <p> En cliquant sur le bouton, vous supprimerez votre comte.</p><br>
                     <p>Attention cette action est irreversible.</p><br>
-                    <button class="colonne_form" type='submit'>supprimer mon compte</button>
+                    <button class="colonne_form" type='submit' name='suppr_profil'>supprimer mon compte</button>
 
                 </form>
             </div>
         </div>
-        <h2>Modifier mes Posts</h2>
-               
-        <div class='posts'>
-                <?php
-                // connexion à la bdd en pdo
-                require('connexion_bdd.php');
 
-                // joint les tables users et posts avec le id de users et le user_id de posts
-                $stmt = $pdo->query("select * from posts left join users on posts.user_id=users.id ORDER BY date_post DESC ");
-                // affiche les posts
-                while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-                    echo "<div class='post'>";
-                    echo "<h3>" . htmlentities($row['titre']) . "</h3>" . "<br>";
-                    echo  htmlentities($row['contenu']) . "<br>" . "<br>";
-                    echo "Posté par: " . htmlentities($row['nom']);
-                    echo "</div>";
+        <h2>Modifier mes Posts</h2>
+        <div class=''>
+            <?php if (!empty($user_posts)) { ?>
+                <div class='posts_profil'>
+                    <?php foreach ($user_posts as $post): ?>
+
+                        <form class='post_profil' method='post'>
+
+                            <input type="hidden" name="post_id" value="<?php echo $post['id']; ?>"> <!-- Ajout d'un champ caché pour l'ID du post -->
+                            <input class="colonne_form" type='text' name='titre' value="<?php echo htmlentities($post['titre']); ?>" required>
+                            <br><br>
+                            <textarea class="form_contenu_profil" name='contenu' required>"<?php echo htmlentities($post['contenu']); ?>" </textarea>
+                            <button class='colonne_form' type='submit' name='modif_post'>Modifier</button>
+                            <button class='colonne_form' type='submit' name='suppr_post'>Supprimer</button>
+
+
+                        </form>
+
+                <?php endforeach;
+                } else {
+                    echo "aucun posts à modifier";
                 }
                 ?>
-            </div>
 
-
+                </div>
+        </div>
     </main>
     <footer class='footer'>
 
