@@ -48,6 +48,9 @@ $posts = $post->fetchAll(PDO::FETCH_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>POST'AIR</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Londrina+Shadow&display=swap" rel="stylesheet"><!-- lien pour la police d'écriture qui s'appelle Atma -->
 </head>
 
 <body>
@@ -64,7 +67,7 @@ $posts = $post->fetchAll(PDO::FETCH_ASSOC);
 
     </header>
     <main>
-        <h1>Bienvenue
+        <h1 class="bienvenue">Bienvenue
             <?php echo htmlentities($_SESSION['nom']); ?>
             chez POST'R</h1>
 
@@ -72,31 +75,28 @@ $posts = $post->fetchAll(PDO::FETCH_ASSOC);
 
             <div class='publi_contenu'>
                 <form class='form' method='post'>
-                    <label for="titre">Choisissez un titre :</label>
+                    <label class="choose" for="titre">Choisissez un titre :</label>
                     <select class='colonne_form' name="titre">
                         <option value="Devinette">Devinette</option>
                         <option value="Charade">Charade</option>
                         <option value="Blague">Blague</option>
                         <option value="Blague pourrie">Blague pourrie</option>
                     </select>
-                    <textarea class='form_contenu' name='contenu' placeholder="votre post" required></textarea>
-                    <button class='colonne_form' class='bouton' type='submit'>Poster</button>
+                    <textarea class='form_contenu' name='contenu' placeholder="Votre post..." required></textarea>
+                    <button class='bouton' type='submit'>Poster</button>
                 </form>
             </div>
+ 
+            <div class='posts'>
+                <?php foreach ($posts as $post): ?>
+                    <div class='post'>
+                        <h3><strong><?php echo htmlentities($post['titre']); ?></strong></h3>
+                        <br>
+                        <p><?php echo htmlentities($post['contenu']); ?></p>
+                        <br>
+                        <p class="pubdate">Publié par <?php echo htmlentities($post['nom']); ?> </p><!-- J'aurai bien rajouté la date de publication-->
 
-
-            
-                
-                <div class='posts'>
-                    <?php foreach ($posts as $post): ?>
-                        <div class='post'>
-                            <p><strong><?php echo htmlentities($post['titre']); ?></strong></p>
-                            <p><br></p>
-                            <p><?php echo htmlentities($post['contenu']); ?></p>
-                            <p><br></p>
-                            <p>Publié par <?php echo htmlentities($post['nom']); ?> </p>
-
-                        </div>
+                    </div>
                     <?php endforeach; ?>
                 </div>
            
@@ -105,7 +105,7 @@ $posts = $post->fetchAll(PDO::FETCH_ASSOC);
 
     <footer class='footer'>
 
-        <p>created by Abdelkrim 10/24</p>
+        <p>Copyright Abdelkrim Octobre 2024</p>
     </footer>
 
 </body>

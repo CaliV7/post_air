@@ -1,39 +1,68 @@
+
+
+
 * {
   margin: 0;
   padding: 0;
   text-decoration: none;
   list-style: none;
-  font-family: Arial, Helvetica, sans-serif;
+  
 }
 
 .header {
   background: linear-gradient( #fbaf9d, #f4dd80);
   display: flex;
   justify-content: space-between;
-  align-items: center;
   font-size: 18px;
   font-weight: bold;
   padding: 20px;
 }
 
+body{
+  font-family: "Atma", system-ui;
+  font-weight: 300;
+  font-style: normal;
+  background-color: #f4dd80;
+}
+
 .titre_header {
-  margin-left: 20px;
+  display: flex;
+  justify-content: center;
+  font-family: "Londrina Shadow", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 32px;
+
 }
 
 .header_lien {
   display: flex;
-  flex-direction: column;
-  margin-right: 20px;
+  flex-direction: column; 
   gap: 5px;
-  font-size: 25px;
+  font-size: 20px;
+}
+
+a{
+  color: black;
+}
+a:hover{
+  text-decoration: underline;
+}
+
+.bienvenue{
+  color: #fac3a4;
+  background: black;
+  border-radius: 10px;
+  padding: 2%;
+  text-shadow: #f4dd80 1px 0 20px;
 }
 
 main {
   display: flex;
   flex-direction: column;
   gap: 45px;
-  background: linear-gradient( #a6dded, #5abcf1);
-  
+  margin: 2% 5%;
+  padding: 2% 5%;
 
 }
 h1{
@@ -44,7 +73,9 @@ h1{
   display: flex;
   justify-content: space-around;
   font-size: 20px;
-
+  border-radius: 20px;
+  padding: 3%;
+  background-color: #eb917d9d;
 }
 
 .image_brebis {
@@ -58,30 +89,37 @@ h1{
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;  
-  gap: 30px;
+  gap: 5%;
   overflow-y: scroll;
   height: 500px;
-
+  margin: 0% 2%;
 }
 
 .post {
+  color: #f4dd80;
   font-size: 21px;
-  background-color: white;
+  background-color: black;
   border-radius: 20px;
-  border: solid;
-  width: 450px;
-  height: 220px;
-  padding: 5px;
+  padding: 5%;
   overflow-y: auto;
-  
-
 }
+
+.pubdate{
+  text-align: right;
+  font-size: 16px;
+}
+
 .publi_contenu{
-  border: solid;
+  border: double 5px;
   border-radius: 20px;
-  
+  padding: 3%;
+  width: 100%;
+}
 
-
+.choose{
+  font-size: 24px;
+  font-weight: bold;
+  text-decoration: underline;
 }
 
 .form {
@@ -89,21 +127,36 @@ h1{
   justify-content: center;
   flex-direction: column;
   gap: 30px;
-  padding: 30px;
-  height: 100%;
-  width: 300px;
+  font-family: "Atma", system-ui;
+  font-weight: 300;
+  font-style: normal;
 
 }
 
-.colonne_form {
-  height: 30px;
-  font-size: 20px;
-  
+.colonne_form { 
+  padding: 2%;
+  font-size: 16px;
+  color: #f3e093;
+  background-color: black;
+  border-radius: 5px;
 }
 .form_contenu{
+  background-color: #f3e093;
+  padding: 2%;
+  font-family: "Atma", system-ui;
+  font-weight: 400;
   height: 250px;
   font-size: 20px;
 }
+
+.bouton{
+
+}
+
+
+
+
+
 .form_contenu_profil{
   height: 100px;
   width: 500px;
