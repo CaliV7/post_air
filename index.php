@@ -69,7 +69,7 @@ $posts = $post->fetchAll(PDO::FETCH_ASSOC);
     <main>
         <h1 class="bienvenue">Bienvenue
             <?php echo htmlentities($_SESSION['nom']); ?>
-            chez POST'R</h1>
+            sur POST'R</h1>
 
         <div class='main_page'>
 

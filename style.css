@@ -10,7 +10,7 @@
 }
 
 .header {
-  background: linear-gradient( #fbaf9d, #f4dd80);
+  background: linear-gradient( #f89a85, #f4dd80);
   display: flex;
   justify-content: space-between;
   font-size: 18px;
@@ -110,13 +110,14 @@ h1{
 }
 
 .publi_contenu{
-  border: double 5px;
+  border: thick double black;
   border-radius: 20px;
   padding: 3%;
   width: 100%;
 }
 
 .choose{
+  text-align: center;
   font-size: 24px;
   font-weight: bold;
   text-decoration: underline;
@@ -126,7 +127,7 @@ h1{
   display: flex;
   justify-content: center;
   flex-direction: column;
-  gap: 30px;
+  gap: 15px;
   font-family: "Atma", system-ui;
   font-weight: 300;
   font-style: normal;
@@ -135,7 +136,9 @@ h1{
 
 .colonne_form { 
   padding: 2%;
-  font-size: 16px;
+  font-size: 20px;
+  font-family: "Atma", system-ui;
+  font-weight: 400;
   color: #f3e093;
   background-color: black;
   border-radius: 5px;
@@ -147,9 +150,22 @@ h1{
   font-weight: 400;
   height: 250px;
   font-size: 20px;
+  border-radius: 5px;
 }
 
 .bouton{
+  padding: 2%;
+  font-size: 20px;
+  font-family: "Atma", system-ui;
+  font-weight: bold;
+  color: #f3e093;
+  background-color: black;
+  border-radius: 5px;
+}
+
+.bouton:hover {
+  background-color: #f4dd80;
+  color: black;
 
 }
 
@@ -208,9 +224,10 @@ h1{
 
 .footer {
   display: flex;
-  justify-content: end;
+  justify-content: center;
   align-items: center;
-  background: linear-gradient( #fbaf9d, #f4dd80);
+  background-color: black;
+  color: #f3e093;
   padding: 10px;
 
 
